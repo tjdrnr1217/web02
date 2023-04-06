@@ -1,11 +1,15 @@
 package cotroller;
 
+import java.io.IOException;
+
+import config.MyBatisContext;
+import dto.Board;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import mapper.BoardMapper;
 
 @WebServlet(urlPatterns = {"/board/Write.do"})
 // 127.0.0.1:8080/web02/home.do
@@ -27,8 +31,34 @@ public class BoardWriteController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String writer = request.getParameter("writer");
+		
+		Board board = new Board();
+		board.setTitle(title);
+		board.setContent(content);
+		board.setWriter(writer);
+		
+		System.out.println(title);
+		System.out.println(content);
+		System.out.println(writer);
+		
+		// 1. DB추가하기
+		
+		// 2. 적절한 페이지로 이동
+		
+		int ret = MyBatisContext.getSqlSession().getMapper(BoardMapper.class).insertBoardOne(board);
+		
+		if(ret == 1) {
+		response.sendRedirect("select.do");
+		}
+		
+		else {
+			response.sendRedirect("writer.do");
+		}
 	}
 
 }
