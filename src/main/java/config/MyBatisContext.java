@@ -10,6 +10,8 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 
 import mapper.BoardMapper;
+import mapper.ItemMapper;
+import mapper.MemberMapper;
 
 
 
@@ -36,6 +38,9 @@ public class MyBatisContext {
 			Environment environment = new Environment("development", transactionFactory, dataSource);
 			Configuration config = new Configuration(environment);
 			config.addMapper(BoardMapper.class);
+			config.addMapper(ItemMapper.class);
+			config.addMapper(MemberMapper.class);
+		
 		
 
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
