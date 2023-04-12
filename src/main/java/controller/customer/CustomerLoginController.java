@@ -10,14 +10,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import mapper.MemberMapper;
 
-@WebServlet(urlPatterns = {"/customer/join.do"})
-public class CustomerJoinController extends HttpServlet {
+@WebServlet(urlPatterns = {"/customer/login.do"})
+public class CustomerLoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
  
-    public CustomerJoinController() {
+    public CustomerLoginController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -25,7 +26,7 @@ public class CustomerJoinController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/WEB-INF/member/customer_join.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/member/customer_login.jsp").forward(request, response);
 	}
 
 
@@ -38,22 +39,25 @@ public class CustomerJoinController extends HttpServlet {
 		Member obj = new Member();
 		obj.setId(request.getParameter("id"));
 		obj.setPassword( hashpw );
-		obj.setName(request.getParameter("name"));
-		obj.setAge(Integer.parseInt(request.getParameter("age")) );
-		obj.setRole("customer");
-		// 객체생성 role => CUSTOMER
-		// mapper를 이용해서 추가
+		
 		MemberMapper mapper = MyBatisContext.getSqlSession().getMapper(MemberMapper.class);
 		
-		long ret = mapper.insertMemberOne(obj);
+		Member ret = mapper.LoginMember(obj);
 		
-		if(ret == 1) {// 127.0.0.1:8080/web02/customer/home.do
+		if(ret != null ) {
+			// 세션에 기록하기. 30분
+			HttpSession httpSession = request.getSession();
+			httpSession.setAttribute("id", ret.getId());
+			httpSession.setAttribute("role", ret.getRole());
+			httpSession.setAttribute("name", ret.getName());
 			response.sendRedirect("home.do");
+			return; //메소드
 		}
-		else{
-			response.sendRedirect(request.getContextPath() + "/customer/join.do");
+		else {
+			response.sendRedirect("login.do");
 		}
-			
+		
+	
 	}
 
 }

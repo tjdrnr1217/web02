@@ -16,7 +16,17 @@ import mapper.MemberMapper;
 
 
 public class MyBatisContext {
+	
+	// 정적 객체 생성
+	private static SqlSession sqlSession;
+	
+	// controller에서 사용할 수 있는 객체
 	public static SqlSession getSqlSession() {
+		return sqlSession;
+	}
+	
+	// 최초 1번만 생성
+	static {
 		try {
 			BasicDataSource dataSource = new BasicDataSource();
 			
@@ -44,10 +54,9 @@ public class MyBatisContext {
 		
 
 			SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(config);
-			return factory.openSession(true); // true이면 자동으로 commit을 수행함
+			sqlSession = factory.openSession(true); // true이면 자동으로 commit을 수행함
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
 		}
 	}
 }
