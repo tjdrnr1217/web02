@@ -1,15 +1,37 @@
 package mapper;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import dto.Member;
 import lombok.experimental.PackagePrivate;
 
 @Mapper
 public interface MemberMapper {
+	
+	@Delete({
+		"DELETE FROM member WHERE id = #{obj.id} AND password = #{obj.password}"
+	})
+	public int deleteMemberOne(@Param("obj") Member obj );
+	
+	@Update({
+		" UPDATE member SET password = #{obj.password1} WHERE id = #{obj.id} AND password = #{obj.password}"
+	})
+	public int updatepasswordMemberOne(@Param("obj") Member obj);
+	
+	@Update({
+		" UPDATE member SET name = #{obj.name}, age = #{obj.age} WHERE id = #{obj.id}"
+	})
+	public int updateMemberone(@Param("obj") Member obj);
+	
+	@Select({
+		" SELECT id, name, age FROM member WHERE id=#{id} "
+	})
+	public Member selectMemberOne(@Param("id") String id);
 	
 	@Select({
 		" SELECT id, role, name FROM member WHERE id=#{obj.id} AND password = #{obj.password}"

@@ -48,7 +48,7 @@ public class CustomerJoinController extends HttpServlet {
 		long ret = mapper.insertMemberOne(obj);
 		
 		if(ret == 1) {// 127.0.0.1:8080/web02/customer/home.do
-			response.sendRedirect("home.do");
+			response.sendRedirect(request.getContextPath() + "/customer/home.do");
 		}
 		else{
 			response.sendRedirect(request.getContextPath() + "/customer/join.do");

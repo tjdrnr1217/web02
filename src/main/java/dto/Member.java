@@ -20,5 +20,6 @@ public class Member {
 	public int age;
 	private Date regdate;
 	private String role;
+	public String password1;
 
 }

@@ -15,24 +15,23 @@
 <!-- bootstrap용 아이콘-->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-<title>고객용 홈화면</title>
+<title>판매용 홈화면</title>
 </head>
 <body>
 	 	<div class="container">
-	 	<h3>고객용 홈화면</h3>
+	 	<h3>판매자 홈화면</h3>
 		<hr/>
 		<a href="home.do" class="btn btn-primary">홈으로</a>
 		<c:if test="${sessionScope.id eq null}">
-			<a href="login.do" class="btn btn-primary">로그인</a>
-			<a href="join.do" class="btn btn-primary">회원가입</a>
+			<a href="${pageContext.request.contextPath}/customer/login.do" class="btn btn-primary">로그인</a>
+			<a href="${pageContext.request.contextPath}/seller/join.do" class="btn btn-primary">회원가입</a>
 			
 		</c:if>
 		
 		<c:if test="${sessionScope.id ne null}">
-			<a href="${pageContext.request.contextPath}/board/select.do" class="btn btn-primary">자유게시판</a>
 			<label>${sessionScope.name}님 로그인</label>			
 			<a href="#" onclick="logoutAction()" class="btn btn-primary">로그아웃</a>
-			<a href="mypage.do" class="btn btn-primary">마이페이지</a>
+			<a href="${pageContext.request.contextPath}/item/select.do" class="btn btn-primary">물품관리</a>
 		</c:if>	
 		<hr />
 	</div>

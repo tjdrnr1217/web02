@@ -39,7 +39,7 @@
 		                <div>
 	                    	<input type="button" value="로그인" class="btn btn-primary" 
 	                    		onclick="loginAction()"/>
-	                    	<a href="join.do" class="btn btn-primary">회원가입</a>	
+	                    	<a href="join.do" class="btn btn-primary">고객회원가입</a>	
 	                    </div>
 	                </div>
 	            </div>
@@ -65,7 +65,7 @@
 		                <div>
 	                    	<input type="button" value="로그인1" class="btn btn-primary" 
 	                    		onclick="loginAction1()"/>
-	                    	<a href="join.do" class="btn btn-primary">회원가입</a>	
+	                    	<a href="${pageContext.request.contextPath}/seller/join.do" class="btn btn-primary">판매자회원가입</a>	
 	                    </div>
 	                </div>
 	            </div>
