@@ -25,7 +25,7 @@ public class UrlFilter implements Filter{
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpSession httpSession = request.getSession();
-		String uri = request.getRequestURI();
+		String uri = request.getRequestURI(); // 컨텍스트 경로 + 서블릿 경로
 
 		if( !uri.contains("login.do") && !uri.contains("logout.do") ) {
 			// home.do              => null   => queryString이 null임
