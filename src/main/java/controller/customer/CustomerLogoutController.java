@@ -23,7 +23,7 @@ public class CustomerLogoutController extends HttpServlet {
 		// 로그아웃. (세션에 있는 기록을 지운다)
 		HttpSession httpSession = request.getSession();
 		httpSession.invalidate();
-		response.sendRedirect(request.getContextPath() + "/customer"+"/login.do");
+		response.sendRedirect(request.getContextPath() + "/customer"+"/home.do");
 
 	}
 

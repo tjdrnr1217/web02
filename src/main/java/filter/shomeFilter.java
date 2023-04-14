@@ -17,9 +17,8 @@ import jakarta.servlet.http.HttpSession;
 // 127.0.0.1:8080/web02/customer/mypage.do
 // 127.0.0.1:8080/web02/customer/orderlist.do
 // 127.0.0.1:8080/web02/customer/orderlist1.do
-// 로그인을 해야되는 페이지 체크용
-@WebFilter(urlPatterns = { "/customer/mypage.do", "/customer/orderlist.do", "/customer/purchase.do" })
-public class CustomerFilter implements Filter {
+@WebFilter(urlPatterns = { "/seller/home.do"})
+public class shomeFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
@@ -27,16 +26,20 @@ public class CustomerFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		System.out.println("customer filter => " + request.getRequestURI());
-		
+
 		HttpSession httpSession = request.getSession();
 		String sessionId = (String) httpSession.getAttribute("id");
-
-		if (sessionId == null) { //세션 객체 없으면 로그인 페이지로.
-			httpSession.setAttribute("url",request.getRequestURI());
-			response.sendRedirect(request.getContextPath() + "/customer"+"/login.do");
-			return;
-		}
+		String sessionRole = (String) httpSession.getAttribute("role");
 		
+		System.out.println(sessionId);
+		System.out.println(sessionRole);
+
+		if (sessionId != null) { // 세션 객체 없으면 로그인 페이지로.
+			if (sessionRole.equals("customer")) {
+				response.sendRedirect(request.getContextPath() + "/customer"+"/login.do");
+				return;
+			}
+		}
 
 		// 컨트롤러로 가지전에 수행해야 하는 작업들..
 		// 로그인이 되었는지 확인

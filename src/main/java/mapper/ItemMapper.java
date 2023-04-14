@@ -18,6 +18,26 @@ public interface ItemMapper {
 	// #{} => 값을 표현
 	// ${} => 컬럼명, 테이블명 등.
 	@Select({
+		" SELECT * FROM itemimage WHERE itemno = #{itemno}"
+	})
+	public List<Long> selectImageOne(@Param("itemno") long itemno);
+	
+	@Select({
+		" SELECT * FROM item WHERE no = #{no}"
+	})
+	public Item selectItemOne(@Param("no") long no);
+	
+	@Select({
+		" SELECT NVL (min(no),0) FROM itemimage WHERE itemno = #{itemno} "
+	})
+	public long selectItmeImageOne(@Param("itemno") long itemno);
+	
+	@Select({
+		" SELECT * FROM item ORDER BY no DESC "
+	})
+	public List<Item> selectItemListAll();
+	
+	@Select({
 		" SELECT COUNT(*) cnt FROM item "
 	})
 	public long countitemList();

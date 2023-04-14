@@ -12,6 +12,7 @@ import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import mapper.BoardMapper;
 import mapper.ItemMapper;
 import mapper.MemberMapper;
+import mapper.PurchaseMapper;
 
 
 
@@ -50,6 +51,7 @@ public class MyBatisContext {
 			config.addMapper(BoardMapper.class);
 			config.addMapper(ItemMapper.class);
 			config.addMapper(MemberMapper.class);
+			config.addMapper(PurchaseMapper.class);
 		
 		
 

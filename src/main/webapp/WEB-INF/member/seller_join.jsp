@@ -104,7 +104,7 @@
 			return false;
 		}
 		if(data.ret == 1){
-			window.location.href = "${pageContext.request.contextPath}/customer/login.do"
+			window.location.href = "${pageContext.request.contextPath}/customer/login.do";
 		}
 		
 	}

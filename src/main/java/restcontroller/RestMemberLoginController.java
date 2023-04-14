@@ -33,10 +33,11 @@ public class RestMemberLoginController extends HttpServlet {
 		Member member = new Member();
 		member.setId(request.getParameter("id"));
 		member.setPassword(hashPw);
-		System.out.println(member.toString());
+		
 		
 		// 아이드를 전달하면 존재하면 1 없으면 0반환 
 		Member ret = MyBatisContext.getSqlSession().getMapper(MemberMapper.class).LoginMember(member);
+		System.out.println(ret.toString());
 			
 		// 전송하는 데이터 타입설정(json문서) => text/html을
 		response.setContentType("application/json");

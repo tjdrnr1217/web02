@@ -1,4 +1,4 @@
-package cotroller;
+package controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,14 +7,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/member/join.do"})
+@WebServlet(urlPatterns = {"/home.do","/main.do"})
 // 127.0.0.1:8080/web02/home.do
 // 127.0.0.1:8080/web02/
 // 127.0.0.1:8080/web02/main.do
-public class JoinController extends HttpServlet {
+public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public JoinController() {
+	public MainController() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -22,7 +22,7 @@ public class JoinController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// main.jsp파일 실행
-		request.getRequestDispatcher("/WEB-INF/join.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

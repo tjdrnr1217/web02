@@ -16,7 +16,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 <title>고객용 홈화면</title>
-<style>
+	<style>
 	 .grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr; 
@@ -39,7 +39,6 @@
 		color   : red;
 		border  : 1px solid red;
 	</style>
-
 </head>
 <body>
 	 	<div class="container">

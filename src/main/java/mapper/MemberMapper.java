@@ -34,7 +34,7 @@ public interface MemberMapper {
 	public Member selectMemberOne(@Param("id") String id);
 	
 	@Select({
-		" SELECT id, role, name FROM member WHERE id=#{obj.id} AND password = #{obj.password}"
+		" SELECT id, role, name, age, regdate FROM member WHERE id=#{obj.id} AND password = #{obj.password}"
 	})
 	public Member LoginMember(@Param("obj") Member obj);
 	

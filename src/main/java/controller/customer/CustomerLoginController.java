@@ -49,16 +49,33 @@ public class CustomerLoginController extends HttpServlet {
 			httpSession.setAttribute("role", ret.getRole());
 			httpSession.setAttribute("name", ret.getName());
 
+			String url = (String) httpSession.getAttribute("url");
+			httpSession.setAttribute(url, null);
+
 			if (ret.getRole().equals("customer")) {
-				response.sendRedirect(request.getContextPath() + "/customer"+"/home.do");
-			}
-			else {
-				response.sendRedirect(request.getContextPath() + "/seller"+"/home.do");
+				if (url == null) {
+					response.sendRedirect(request.getContextPath() + "/customer" + "/home.do");
+					return;
+				} else {// 마지막페이지로 이동될수 있게 변경...
+					response.sendRedirect(url);
+					return;
+				}
+			} else {
+				if (url == null) {
+					response.sendRedirect(request.getContextPath() + "/seller" + "/home.do");
+					return;
+				} else {// 마지막페이지로 이동될수 있게 변경...
+					response.sendRedirect(url);
+					return;
+				}
 			}
 		} else {
 			response.sendRedirect("login.do");
+
 		}
-
+		
+		
+		
+		
 	}
-
 }
