@@ -50,7 +50,7 @@ public class CustomerLoginController extends HttpServlet {
 			httpSession.setAttribute("name", ret.getName());
 
 			String url = (String) httpSession.getAttribute("url");
-			httpSession.setAttribute(url, null);
+			httpSession.setAttribute("url", null);
 
 			if (ret.getRole().equals("customer")) {
 				if (url == null) {

@@ -1,7 +1,9 @@
 package mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -12,6 +14,25 @@ import dto.PurchaseView;
 
 @Mapper
 public interface PurchaseMapper {
+	
+	// 회원별 주문수량 합계
+	@Select({
+		" SELECT customerid, SUM(cnt) cnt FROM purchase GROUP BY customerid "
+	})
+	public List<Map<String,Object> > selectMemberGroup();
+	
+	//삭제하기
+	@Delete({ // delete controller에서 chk가 배열로 지정되어있기때문에 반복문을 사용해야한다(foreach는 배열을 반복할때 사용)
+		"<script>",
+		"DELETE FROM purchase WHERE customerid=#{map.id} AND no IN( ",
+			"<foreach collection='map.chk' item='tmp' separator=','>",
+				"#{tmp}",
+			"</foreach>",
+		") ",
+		"</script>"
+	})
+	// DELETE FROM 테이블명 WHERE customerid = 'a' AND no (1,2,3,4);
+	public int deletePurchase(@Param("map") Map<String, Object> map);
 	
 	// 주문하기
 	@Insert({
@@ -32,4 +53,5 @@ public interface PurchaseMapper {
 		" SELECT pv.* FROM purchaseview pv WHERE  customerid=#{id}"
 	})
 	public List<PurchaseView> selectPurchaseViewMember(@Param("id") String id);
+
 }

@@ -19,24 +19,27 @@
 </head>
 <body>
 	<div class="container">
-		<a href="${pageContext.request.contextPath}/customer/home.do" class="btn btn-primary">홈</a>
-		<a href="mypage.do?menu=1" class="btn btn-primary">회원정보수정</a>
-		<a href="mypage.do?menu=2" class="btn btn-primary">회원비번변경</a>
-		<a href="mypage.do?menu=3" class="btn btn-primary">회원탈퇴</a>
-		<a href="mypage.do?menu=4" class="btn btn-primary">주문내역</a>
+		<a href="purchase.do?menu=1" class="btn btn-sm btn-primary">전체 주문목록</a>
+		<a href="purchase.do?menu=2" class="btn btn-sm btn-primary">회원별 주문목록</a>
+		<a href="purchase.do?menu=3" class="btn btn-sm btn-primary">물품별 주문목록</a>
+		<a href="purchase.do?menu=4" class="btn btn-sm btn-primary">시간대별 주문목록</a>		
 		<hr/>
-		<c:if test="${param.menu == 1 }"> 
-			<jsp:include page="../customer_menu/menu1.jsp"></jsp:include>
+		
+		<c:if test="${param.menu == 1 }">
+			<jsp:include page="../purchase_menu/menu1.jsp"></jsp:include>
 		</c:if>
+		
 		<c:if test="${param.menu == 2 }">
-			<jsp:include page="../customer_menu/menu2.jsp"></jsp:include>
+			<jsp:include page="../purchase_menu/menu2.jsp"></jsp:include>
 		</c:if>
+		
 		<c:if test="${param.menu == 3 }">
-			<jsp:include page="../customer_menu/menu3.jsp"></jsp:include>
+			<jsp:include page="../purchase_menu/menu3.jsp"></jsp:include>
 		</c:if>
+		
 		<c:if test="${param.menu == 4 }">
-			<jsp:include page="../customer_menu/menu4.jsp"></jsp:include>
-		</c:if>
+			<jsp:include page="../purchase_menu/menu4.jsp"></jsp:include>
+		</c:if>	
 	</div>
 	
 	<!-- axios 추가 -->
@@ -55,36 +58,6 @@
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N"
 		crossorigin="anonymous"></script>
-	<script>
-	function updateMember(){
-			// 유효성 검사
-			const name = document.getElementsByName("name")[0];
-			const age = document.getElementsByName("age")[0];
-			
-			// document.getElementsByTagName("form")[0].submit(); 아래가 같다
-			const form = document.getElementsByTagName("form");
-			form[0].submit();
-	}
-	
-	function pwupdateMember(){
-		const pw = document.getElementsByName("pw")[0];
-		const pw1 = document.getElementsByName("pw1")[0];
-		
-		// document.getElementsByTagName("form")[0].submit(); 아래가 같다
-		const form = document.getElementsByTagName("form");
-		form[0].submit();
-	}
-	
-	function deleteMember() {
-		const id = document.getElementsByName("id")[0];
-		const name = document.getElementsByName("name")[0];
-		const age = document.getElementsByName("age")[0];
-		const password = document.getElementsByName("password")[0];
-		
-		const form = document.getElementsByTagName("form");
-		form[0].submit();
-	}
-	</script>
 
 </body>
 </html>

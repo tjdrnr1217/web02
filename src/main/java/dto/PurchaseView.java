@@ -14,13 +14,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PurchaseView {
-	private String iname;
-	private long price;
-	private String name;
 	private long no;
 	private long cnt;
-	private long itemno;
-	private String customerid;
 	private Date regdate;
+	private String customerid;
+	private String customername;
+	private long itemno;
+	private String itemname;
+	private long itemprice;
 	
 }

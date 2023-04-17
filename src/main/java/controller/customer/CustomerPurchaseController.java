@@ -20,15 +20,7 @@ public class CustomerPurchaseController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		HttpSession httpSession = request.getSession();
-		String id = (String) httpSession.getAttribute("id");
-		
-		
-		List<PurchaseView> aa = MyBatisContext.getSqlSession().getMapper(PurchaseMapper.class).selectPurchaseViewMember(id);
-		
-		request.setAttribute("aa", aa);
-		
+	
 		request.getRequestDispatcher("/WEB-INF/member/customer_purchase.jsp").forward(request, response);
 	}
 	
@@ -47,8 +39,10 @@ public class CustomerPurchaseController extends HttpServlet {
 		int ret = MyBatisContext.getSqlSession().getMapper(PurchaseMapper.class).insertPurchaseOne(obj);
 		
 		if( ret == 1) {
-			response.sendRedirect(request.getContextPath() + "/customer" + "/home.do");
+			response.sendRedirect("mypage.do?menu=4");
+			return;
 		}
+		response.sendRedirect("product.do?itemno="+itemno);
 
 	}
 
