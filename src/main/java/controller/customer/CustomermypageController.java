@@ -5,6 +5,7 @@ import java.util.List;
 
 import config.Hash;
 import config.MyBatisContext;
+import dto.Address;
 import dto.Member;
 import dto.PurchaseView;
 import jakarta.servlet.ServletException;
@@ -13,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import mapper.AddressMapper;
 import mapper.MemberMapper;
 import mapper.PurchaseMapper;
 
@@ -39,6 +41,11 @@ public class CustomermypageController extends HttpServlet {
 		if(Integer.parseInt(menu) == 4) {
 			
 			List<PurchaseView> list = MyBatisContext.getSqlSession().getMapper(PurchaseMapper.class).selectPurchaseViewMember(id);
+			request.setAttribute("list", list);
+		}
+		
+		if(Integer.parseInt(menu) == 5) {
+			List<Address> list = MyBatisContext.getSqlSession().getMapper(AddressMapper.class).selectAddress(id);
 			request.setAttribute("list", list);
 		}
 		
@@ -89,6 +96,22 @@ public class CustomermypageController extends HttpServlet {
 			}
 			
 		} 
+		
+		else if(menu == 5) {
+			String id = (String) request.getSession().getAttribute("id");
+			String postcode = request.getParameter("postcode"); // getParameter 무저건 name값
+			String address = request.getParameter("address");
+			String detailAddress = request.getParameter("detailAddress");
+			String extraAddress = request.getParameter("extraAddress");
+			
+			Address ad = new Address();
+			ad.setMemberid(id);
+			ad.setPostcode(postcode);
+			ad.setAddress(address + detailAddress + extraAddress);
+			
+			MyBatisContext.getSqlSession().getMapper(AddressMapper.class).insertAddress(ad);
+			
+		}
 		response.sendRedirect("mypage.do?menu=" + menu);
 	}
 }

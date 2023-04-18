@@ -24,6 +24,7 @@
 		<a href="mypage.do?menu=2" class="btn btn-primary">회원비번변경</a>
 		<a href="mypage.do?menu=3" class="btn btn-primary">회원탈퇴</a>
 		<a href="mypage.do?menu=4" class="btn btn-primary">주문내역</a>
+		<a href="mypage.do?menu=5" class="btn btn-primary">주소관리</a>
 		<hr/>
 		<c:if test="${param.menu == 1 }"> 
 			<jsp:include page="../customer_menu/menu1.jsp"></jsp:include>
@@ -36,6 +37,9 @@
 		</c:if>
 		<c:if test="${param.menu == 4 }">
 			<jsp:include page="../customer_menu/menu4.jsp"></jsp:include>
+		</c:if>
+		<c:if test="${param.menu == 5 }">
+			<jsp:include page="../customer_menu/menu5.jsp"></jsp:include>
 		</c:if>
 	</div>
 	
